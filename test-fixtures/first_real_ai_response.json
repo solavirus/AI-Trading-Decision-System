@@ -1,0 +1,264 @@
+{
+  "responseVersion": "1.1.0",
+  "analysisId": "AMSJ7CNTY45R5",
+  "summary": {
+    "title": "偏多证据存在，但宏观事件临近，策略以等待为主",
+    "content": "BTC/USDT 4H 上出现一定偏多信号：现价 64,755.42，价格高于 SMA50，RSI 63.9，ETF 资金流为净流入，衍生品资金费率为正且多空账户比略偏多，期权 Put/Call 持仓比 0.58 也偏向风险偏好。同时，新闻中有 ETF 流入、鲸鱼买入和就业走弱降低加息押注等利多线索。另一方面，市场情绪仍处于恐惧区间 29，且宏观日历显示 08/07 20:30 非农就业报告为高影响事件，短线方向可能受事件驱动而非现有技术面延续。由于支持做多的证据并非一致压倒性，且事件风险临近，当前更适合等待而非追价入场。"
+  },
+  "decision": {
+    "direction": "NEUTRAL",
+    "action": "WAIT",
+    "confidence": 69
+  },
+  "tradingPlan": {
+    "entry": {
+      "type": "ZONE",
+      "value": null,
+      "from": null,
+      "to": null
+    },
+    "stopLoss": null,
+    "takeProfit": [],
+    "holdingPeriod": "等待 08/07 20:30 高影响非农就业报告后，再评估未来 1-3 个 4H K 线周期"
+  },
+  "weightContribution": [
+    {
+      "sourceId": "technical",
+      "configuredWeight": 17,
+      "influenceScore": 78,
+      "influenceLevel": "HIGH",
+      "explanation": "技术面是当前最明确的偏多证据之一：价格高于 SMA50，RSI 63.9，说明 4H 级别趋势和动能都偏强，但 RSI 已不低，因此支持上涨延续但不足以单独支持追多。",
+      "evidenceReferences": [
+        "sourceSnapshots:technical"
+      ]
+    },
+    {
+      "sourceId": "derivatives",
+      "configuredWeight": 17,
+      "influenceScore": 72,
+      "influenceLevel": "HIGH",
+      "explanation": "资金费率 0.0063% 为正，多空账户比 1.07，显示杠杆市场轻度偏多，但读数并不极端，更像温和支持而不是强趋势确认。",
+      "evidenceReferences": [
+        "sourceSnapshots:derivatives"
+      ]
+    },
+    {
+      "sourceId": "market",
+      "configuredWeight": 9,
+      "influenceScore": 55,
+      "influenceLevel": "MEDIUM",
+      "explanation": "现价 64,755.42，单日变动仅 +0.03%，说明价格处于相对高位附近但短线缺乏强烈即时报价动能，支持观望而非立即追随。",
+      "evidenceReferences": [
+        "sourceSnapshots:market"
+      ]
+    },
+    {
+      "sourceId": "macro",
+      "configuredWeight": 9,
+      "influenceScore": 84,
+      "influenceLevel": "HIGH",
+      "explanation": "宏观面对交易决策影响很大，不是因为方向明确，而是因为 08/07 20:30 非农就业报告为高影响事件，可能迅速改变风险偏好。近期新闻对就业偏弱和加息预期降温有利于 BTC，但事件尚未落地，因此更强化等待。",
+      "evidenceReferences": [
+        "sourceSnapshots:macro",
+        "selectedNewsEvents:news-event-11",
+        "selectedNewsEvents:news-event-22"
+      ]
+    },
+    {
+      "sourceId": "news",
+      "configuredWeight": 7,
+      "influenceScore": 67,
+      "influenceLevel": "MEDIUM",
+      "explanation": "新闻流整体偏多，包含 ETF 流入激增、鲸鱼买入、弱就业压低加息押注等，但也存在死亡十字、乐观情绪已计价等相反表述，说明消息面对方向支持不一致。",
+      "evidenceReferences": [
+        "selectedNewsEvents:news-event-43",
+        "selectedNewsEvents:news-event-63",
+        "selectedNewsEvents:news-event-11",
+        "selectedNewsEvents:news-event-22",
+        "selectedNewsEvents:news-event-9",
+        "selectedNewsEvents:news-event-12"
+      ]
+    },
+    {
+      "sourceId": "etf",
+      "configuredWeight": 7,
+      "influenceScore": 74,
+      "influenceLevel": "HIGH",
+      "explanation": "ETF 资金流是较强的支撑因素，IBIT +170.66M USD，BITB 也为净流入，且新闻中也提到 ETF 吸引资金流入。不过 ETF 数据覆盖并不完整，摘要显示多个发行方暂无份额数据源，因此其支持力度需保守解读。",
+      "evidenceReferences": [
+        "sourceSnapshots:etf",
+        "selectedNewsEvents:news-event-43",
+        "selectedNewsEvents:news-event-63"
+      ]
+    },
+    {
+      "sourceId": "onchain",
+      "configuredWeight": 9,
+      "influenceScore": 34,
+      "influenceLevel": "LOW",
+      "explanation": "链上可用 BTC 相关证据有限，仅看到快速确认费率 4 sat/vB，说明链上拥堵不高，但这对方向判断帮助有限。",
+      "evidenceReferences": [
+        "sourceSnapshots:onchain"
+      ]
+    },
+    {
+      "sourceId": "sentiment",
+      "configuredWeight": 6,
+      "influenceScore": 61,
+      "influenceLevel": "MEDIUM",
+      "explanation": "恐惧与贪婪指数 29 处于恐惧区间，和价格偏强形成冲突。它可被理解为逆向支撑，但同时也说明市场信心并不稳固，因此更适合作为谨慎而非激进做多的依据。",
+      "evidenceReferences": [
+        "sourceSnapshots:sentiment"
+      ]
+    },
+    {
+      "sourceId": "stablecoin",
+      "configuredWeight": 5,
+      "influenceScore": 48,
+      "influenceLevel": "MEDIUM",
+      "explanation": "稳定币总市值 24h +0.32%，USDC +0.46%，反映一定流动性扩张；但 USDT 24h -0.10%，整体只能算温和中性偏多，无法提供强入场信号。",
+      "evidenceReferences": [
+        "sourceSnapshots:stablecoin"
+      ]
+    },
+    {
+      "sourceId": "options",
+      "configuredWeight": 2,
+      "influenceScore": 58,
+      "influenceLevel": "MEDIUM",
+      "explanation": "BTC Put/Call 持仓比 0.58 偏多，隐含波动率 41.4% 不低，最大痛点约 60,000 USD，说明期权市场整体风险偏好尚可，但该来源权重很低，只能作为次要辅助。",
+      "evidenceReferences": [
+        "sourceSnapshots:options"
+      ]
+    }
+  ],
+  "reasoning": [
+    {
+      "title": "技术面偏多但不是低风险追价位",
+      "description": "4H 技术快照显示价格高于 SMA50 且 RSI 63.9，支持趋势偏多与动能偏强。但 RSI 已接近偏热区域，意味着上行空间未必具备高性价比，尤其在重大宏观事件前。",
+      "importance": 82,
+      "stance": "SUPPORT",
+      "evidenceReferences": [
+        "sourceSnapshots:technical"
+      ]
+    },
+    {
+      "title": "衍生品结构支持温和偏多，不支持极端方向判断",
+      "description": "资金费率 0.0063% 为正，多空账户比 1.07，说明杠杆市场略偏多，但并未达到拥挤或强趋势确认水平，因此更适合作为辅助支持，而不是直接触发做多。",
+      "importance": 78,
+      "stance": "SUPPORT",
+      "evidenceReferences": [
+        "sourceSnapshots:derivatives"
+      ]
+    },
+    {
+      "title": "ETF 流入与鲸鱼买盘提供现货支撑",
+      "description": "IBIT 录得 +170.66M USD 流入，BITB 也为正流入；新闻还提到 ETF 吸引资金以及鲸鱼买入 12 亿美元 BTC。这些都支持现货需求存在，但 ETF 数据覆盖不完整，需保留谨慎态度。",
+      "importance": 76,
+      "stance": "SUPPORT",
+      "evidenceReferences": [
+        "sourceSnapshots:etf",
+        "selectedNewsEvents:news-event-43",
+        "selectedNewsEvents:news-event-63"
+      ]
+    },
+    {
+      "title": "宏观高影响事件临近，削弱立即入场的确定性",
+      "description": "宏观日历显示 08/07 20:30 将公布高影响非农就业报告，且 08/12 20:30 还有高影响 CPI。虽然已有新闻认为低就业数据冷却加息押注并推升 BTC，但正式数据公布前，波动与方向反转风险都较高。",
+      "importance": 91,
+      "stance": "OPPOSE",
+      "evidenceReferences": [
+        "sourceSnapshots:macro",
+        "selectedNewsEvents:news-event-11",
+        "selectedNewsEvents:news-event-22"
+      ]
+    },
+    {
+      "title": "消息面存在明显冲突，不能单边解读",
+      "description": "一方面有就业走弱、ETF 流入、鲸鱼买盘等利多；另一方面也有“死亡十字”以及“乐观已经计价”的谨慎观点。证据并不一致，因此更适合等待而非基于单一叙事押注方向。",
+      "importance": 80,
+      "stance": "NEUTRAL",
+      "evidenceReferences": [
+        "selectedNewsEvents:news-event-9",
+        "selectedNewsEvents:news-event-11",
+        "selectedNewsEvents:news-event-12",
+        "selectedNewsEvents:news-event-43"
+      ]
+    },
+    {
+      "title": "情绪恐惧与价格偏强形成背离",
+      "description": "恐惧与贪婪指数仅 29，处于恐惧区间，而价格与技术面又偏强。这种背离可能意味着仍有上行墙外资金，也可能意味着市场对高位缺乏信心，因此对方向判断构成不确定性。",
+      "importance": 64,
+      "stance": "NEUTRAL",
+      "evidenceReferences": [
+        "sourceSnapshots:sentiment",
+        "sourceSnapshots:technical",
+        "sourceSnapshots:market"
+      ]
+    }
+  ],
+  "risks": [
+    {
+      "title": "非农数据事件风险",
+      "description": "08/07 20:30 非农就业报告为高影响事件，可能在短时间内改变利率预期与风险资产方向。",
+      "impact": "HIGH"
+    },
+    {
+      "title": "利多已部分计价风险",
+      "description": "新闻中存在“乐观情绪已经反映在比特币中”的观点，若市场预期过满，正面消息未必继续推动价格上行。",
+      "impact": "MEDIUM"
+    },
+    {
+      "title": "消息面冲突导致假突破",
+      "description": "ETF 流入与鲸鱼买盘偏利多，但死亡十字等偏空叙事仍在，若追价可能遭遇事件驱动的来回扫动。",
+      "impact": "HIGH"
+    },
+    {
+      "title": "数据覆盖有限的解释风险",
+      "description": "ETF 摘要明确显示多个发行方暂无份额数据源，因此不能把当前可见流入等同于全市场完整结论。",
+      "impact": "MEDIUM"
+    }
+  ],
+  "evidence": [
+    {
+      "reason": "4H 技术面偏多",
+      "references": [
+        "sourceSnapshots:technical"
+      ]
+    },
+    {
+      "reason": "衍生品结构轻度偏多",
+      "references": [
+        "sourceSnapshots:derivatives"
+      ]
+    },
+    {
+      "reason": "ETF 资金流提供支撑",
+      "references": [
+        "sourceSnapshots:etf"
+      ]
+    },
+    {
+      "reason": "高影响宏观事件临近，应优先控制风险",
+      "references": [
+        "sourceSnapshots:macro"
+      ]
+    },
+    {
+      "reason": "新闻流存在利多与谨慎观点并存的冲突证据",
+      "references": [
+        "selectedNewsEvents:news-event-11",
+        "selectedNewsEvents:news-event-22",
+        "selectedNewsEvents:news-event-43",
+        "selectedNewsEvents:news-event-9",
+        "selectedNewsEvents:news-event-12"
+      ]
+    },
+    {
+      "reason": "市场情绪仍处于恐惧区间",
+      "references": [
+        "sourceSnapshots:sentiment"
+      ]
+    }
+  ]
+}

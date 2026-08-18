@@ -1,0 +1,147 @@
+量化/  (深度 4 层；已排除 node_modules/.git/dist/build/cache/coverage/out 等生成目录)
+├── .claude/
+│   └── scheduled_tasks.lock
+├── pipeline/
+│   ├── data/
+│   │   ├── ai_connections.json
+│   │   ├── ai_provider_config.json
+│   │   ├── ai_role_config.json
+│   │   ├── etf_flows.sqlite
+│   │   ├── evidence_parse_cache.json
+│   │   └── exchange_connections.json
+│   ├── scripts/
+│   │   └── etf-daily-snapshot.ts
+│   ├── src/
+│   │   ├── ai/
+│   │   │   ├── providers/
+│   │   │   │   └── ... (depth limit reached)
+│   │   │   ├── configStore.ts
+│   │   │   ├── configTest.ts
+│   │   │   ├── connectionStore.ts
+│   │   │   ├── connectionTest.ts
+│   │   │   ├── engine.ts
+│   │   │   ├── evidenceParser.ts
+│   │   │   ├── modelDiscovery.ts
+│   │   │   ├── providerHttp.ts
+│   │   │   ├── registry.ts
+│   │   │   ├── roleResolver.ts
+│   │   │   └── types.ts
+│   │   ├── collectors/
+│   │   │   └── liquidationCollector.ts
+│   │   ├── connectors/
+│   │   │   ├── binanceLiquidationConnector.ts
+│   │   │   ├── binanceMarketConnector.ts
+│   │   │   ├── coinglassLiquidationConnector.ts
+│   │   │   └── types.ts
+│   │   ├── etf/
+│   │   │   ├── issuers/
+│   │   │   │   └── ... (depth limit reached)
+│   │   │   ├── snapshot.ts
+│   │   │   ├── tickers.ts
+│   │   │   └── yahooFinance.ts
+│   │   ├── exchange/
+│   │   │   ├── binanceFuturesAdapter.ts
+│   │   │   ├── binanceSign.ts
+│   │   │   ├── exchangeConnectionStore.ts
+│   │   │   ├── exchangeService.ts
+│   │   │   ├── orderSizing.ts
+│   │   │   ├── types.ts
+│   │   │   └── userDataStreamManager.ts
+│   │   ├── news/
+│   │   │   └── cluster.ts
+│   │   ├── normalize/
+│   │   │   ├── liquidation.ts
+│   │   │   └── market.ts
+│   │   ├── sources/
+│   │   │   ├── assets.ts
+│   │   │   ├── derivatives.ts
+│   │   │   ├── etf.ts
+│   │   │   ├── liquidation.ts
+│   │   │   ├── liquidationDetail.ts
+│   │   │   ├── macro.ts
+│   │   │   ├── market.ts
+│   │   │   ├── marketDetail.ts
+│   │   │   ├── news.ts
+│   │   │   ├── okx.ts
+│   │   │   ├── onchain.ts
+│   │   │   ├── options.ts
+│   │   │   ├── sentiment.ts
+│   │   │   ├── stablecoin.ts
+│   │   │   └── technical.ts
+│   │   ├── util/
+│   │   │   ├── env.ts
+│   │   │   ├── http.ts
+│   │   │   ├── indicators.ts
+│   │   │   ├── rss.ts
+│   │   │   ├── tokens.ts
+│   │   │   ├── translate.ts
+│   │   │   └── xoomar.ts
+│   │   ├── caps.ts
+│   │   ├── db.ts
+│   │   ├── fetchers.ts
+│   │   ├── filter.ts
+│   │   ├── run.ts
+│   │   ├── server.ts
+│   │   ├── types.ts
+│   │   └── weights.ts
+│   ├── .env
+│   ├── .env.example
+│   ├── .gitignore
+│   ├── package-lock.json
+│   ├── package.json
+│   ├── README.md
+│   └── tsconfig.json
+├── product-docs/
+│   ├── archive/
+│   │   ├── CHANGELOG.md
+│   │   ├── DEV_STATUS.md
+│   │   ├── SCREENSHOT_GUIDE.md
+│   │   └── UI_INDEX.md
+│   ├── screenshots/
+│   │   ├── analysis-runner-ready.png
+│   │   ├── analysis-runner-real-failed.png
+│   │   ├── analysis-runner-real-progress.png
+│   │   ├── research-empty-evidence.png
+│   │   └── sidebar-dev-review-mode.png
+│   └── PRODUCT_STATUS.md
+├── prototype/
+│   ├── artifact.html
+│   └── index.html
+├── quant-assistant-wizard-prototype/
+│   ├── docs/
+│   │   ├── CLAUDE_CODE_IMPLEMENTATION.md
+│   │   ├── COMPONENT_SPEC.md
+│   │   ├── DESIGN_SYSTEM.md
+│   │   └── PIXEL_SPEC.md
+│   ├── public/
+│   │   └── assets/
+│   │       ├── textures/
+│   │       │   └── ... (depth limit reached)
+│   │       └── wizard/
+│   │           └── ... (depth limit reached)
+│   ├── src/
+│   │   ├── components/
+│   │   │   └── DoodleCard.tsx
+│   │   └── styles/
+│   │       └── wizard-tokens.css
+│   ├── design-tokens.json
+│   ├── doodle-pivot-screenshot.png
+│   ├── phase2-screenshot.png
+│   ├── phase3-group1-screenshot.png
+│   ├── phase3-group2-screenshot.png
+│   ├── phase3-group4-screenshot.png
+│   ├── phase3-group5-screenshot.png
+│   ├── phase4-final-screenshot.png
+│   ├── README.md
+│   └── reference-master.png
+├── test-fixtures/
+│   ├── first_real_ai_response.json
+│   └── run_regression.mjs
+├── AI_RESPONSE_SPEC.md
+├── ANALYSIS_PAYLOAD_SPEC.md
+├── DATA_SOURCE_SPEC.md
+├── EXECUTION_SPEC.md
+├── MVP Handbook.md
+├── PROJECT.md
+├── PROMPT_BUILDER_SPEC.md
+└── Quant Decision System.md

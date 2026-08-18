@@ -1,0 +1,19 @@
+{
+  "name": "quant-pipeline",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Real data-source acquisition/aggregation pipeline for the Quant Decision System. Program-side collection, filtering and weight-driven budgeting only — no LLM calls yet.",
+  "scripts": {
+    "fetch": "tsx src/run.ts",
+    "serve": "tsx src/server.ts",
+    "dev": "tsx watch src/server.ts",
+    "etf:snapshot": "tsx scripts/etf-daily-snapshot.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.3",
+    "tsx": "^4.19.2",
+    "@types/node": "^22.9.0"
+  }
+}

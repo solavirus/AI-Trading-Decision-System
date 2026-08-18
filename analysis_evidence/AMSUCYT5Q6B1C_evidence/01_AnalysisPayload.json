@@ -1,0 +1,396 @@
+{
+  "analysisId": "AMSUCYT5Q6B1C",
+  "createdAt": "2026-08-15T12:35:07.988Z",
+  "payloadVersion": "1.2.0",
+  "symbol": "BTC/USDT",
+  "timeframe": "4H",
+  "dateRange": "最近7天",
+  "sourceWeights": {
+    "market": 10,
+    "technical": 19,
+    "macro": 10,
+    "news": 8,
+    "etf": 8,
+    "onchain": 10,
+    "sentiment": 6,
+    "derivatives": 19,
+    "stablecoin": 5,
+    "liquidation": 0,
+    "options": 5
+  },
+  "additionalEvidence": [],
+  "sourceSnapshots": [
+    {
+      "id": "market",
+      "name": "市场行情",
+      "status": "available",
+      "updatedAt": "2026-08-15T12:34:48.351Z",
+      "values": [
+        {
+          "label": "BTC/USDT",
+          "value": "62,979.4 (+0.19%)"
+        }
+      ],
+      "summary": "provider: OKX (fallback)",
+      "error": null
+    },
+    {
+      "id": "technical",
+      "name": "技术指标",
+      "status": "available",
+      "updatedAt": "2026-08-15T12:34:48.386Z",
+      "values": [
+        {
+          "label": "BTC/USDT 技术面",
+          "value": "价格低于 SMA50，RSI 55.4"
+        }
+      ],
+      "summary": "provider: OKX (fallback); partial: DOGE-USDT: This operation was aborted",
+      "error": null
+    },
+    {
+      "id": "macro",
+      "name": "宏观经济",
+      "status": "available",
+      "updatedAt": "2026-08-15T12:34:40.403Z",
+      "values": [
+        {
+          "label": "CPI（消费者物价指数）",
+          "value": "08/12 20:30（高影响）"
+        },
+        {
+          "label": "GDP（第二次估算）及企业利润, 2nd Quarter 2026",
+          "value": "08/26 20:30（中影响）"
+        },
+        {
+          "label": "非农就业报告",
+          "value": "09/04 20:30（高影响）"
+        },
+        {
+          "label": "CPI（消费者物价指数）",
+          "value": "09/11 20:30（高影响）"
+        }
+      ],
+      "summary": "FRED fetch failed: This operation was aborted",
+      "error": null
+    },
+    {
+      "id": "news",
+      "name": "新闻资讯",
+      "status": "available",
+      "updatedAt": "2026-08-15T12:34:53.577Z",
+      "values": [
+        {
+          "label": "已抓取新闻总数",
+          "value": "31"
+        },
+        {
+          "label": "时间/资产筛选后",
+          "value": "10"
+        },
+        {
+          "label": "聚类后事件数",
+          "value": "10"
+        },
+        {
+          "label": "已选入 selectedNewsEvents",
+          "value": "10"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "etf",
+      "name": "ETF 资金流",
+      "status": "available",
+      "updatedAt": "2026-08-15T12:34:40.456Z",
+      "values": [
+        {
+          "label": "IBIT 资金流",
+          "value": "-53.16M USD"
+        }
+      ],
+      "summary": "Xoomar etf-flows 获取失败: This operation was aborted; FBTC/GBTC/ARKB/BITB/HODL/ETHA/FETH/ETHE 还没有份额数据源（见 src/etf/issuers/）",
+      "error": null
+    },
+    {
+      "id": "onchain",
+      "name": "链上数据",
+      "status": "available",
+      "updatedAt": "2026-08-15T12:34:59.623Z",
+      "values": [
+        {
+          "label": "BTC 链上拥堵度",
+          "value": "快速确认费率 2 sat/vB"
+        },
+        {
+          "label": "ETH 流通供应量",
+          "value": "122.37M ETH"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "sentiment",
+      "name": "市场情绪",
+      "status": "available",
+      "updatedAt": "2026-08-15T12:34:59.651Z",
+      "values": [
+        {
+          "label": "恐惧与贪婪指数",
+          "value": "34（恐惧）"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "derivatives",
+      "name": "衍生品数据",
+      "status": "available",
+      "updatedAt": "2026-08-15T12:34:55.716Z",
+      "values": [
+        {
+          "label": "BTC/USDT 资金费率/持仓量",
+          "value": "资金费率 0.0065%，多空账户比 2.08"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "stablecoin",
+      "name": "稳定币数据",
+      "status": "available",
+      "updatedAt": "2026-08-15T12:34:55.825Z",
+      "values": [
+        {
+          "label": "稳定币总市值",
+          "value": "307.74B USD（24h +0.35%）"
+        },
+        {
+          "label": "USDT 流通量",
+          "value": "183.04B USD（24h +0.04%）"
+        },
+        {
+          "label": "USDC 流通量",
+          "value": "72.01B USD（24h -0.12%）"
+        },
+        {
+          "label": "USDS 流通量",
+          "value": "6.67B USD（24h +0.39%）"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "options",
+      "name": "期权数据",
+      "status": "available",
+      "updatedAt": "2026-08-15T12:34:56.427Z",
+      "values": [
+        {
+          "label": "BTC 期权隐含波动率",
+          "value": "41.6%"
+        },
+        {
+          "label": "BTC Put/Call 持仓比",
+          "value": "0.56"
+        },
+        {
+          "label": "BTC 最大痛点（近似）",
+          "value": "70,000 USD"
+        },
+        {
+          "label": "ETH 期权隐含波动率",
+          "value": "56.2%"
+        },
+        {
+          "label": "ETH Put/Call 持仓比",
+          "value": "0.52"
+        },
+        {
+          "label": "ETH 最大痛点（近似）",
+          "value": "2,500 USD"
+        }
+      ],
+      "error": null
+    }
+  ],
+  "selectedNewsEvents": [
+    {
+      "id": "news-event-9",
+      "title": "SEC Charges Boiler Room Operator and Three Entities with Defrauding Retail Investors in $74 Million Pre-IPO Investment Scam",
+      "summary": "来源：SEC",
+      "publishedAt": "2026-08-14T20:16:34.000Z",
+      "sourceCount": 1,
+      "sources": [
+        "SEC"
+      ],
+      "importanceScore": 65,
+      "relatedAssets": [
+        "BTC"
+      ],
+      "sourceArticleIds": [
+        "news-event-9"
+      ]
+    },
+    {
+      "id": "news-event-23",
+      "title": "Morgan Stanley’s BlackRock Bitcoin ETF holdings rise 23% in Q2",
+      "summary": "来源：Cointelegraph",
+      "publishedAt": "2026-08-14T14:22:57.000Z",
+      "sourceCount": 1,
+      "sources": [
+        "Cointelegraph"
+      ],
+      "importanceScore": 65,
+      "relatedAssets": [
+        "BTC"
+      ],
+      "sourceArticleIds": [
+        "news-event-23"
+      ]
+    },
+    {
+      "id": "news-event-24",
+      "title": "JPMorgan boosts Bitcoin, Ether ETF positions in Q2 filing",
+      "summary": "来源：Cointelegraph",
+      "publishedAt": "2026-08-14T14:14:06.000Z",
+      "sourceCount": 1,
+      "sources": [
+        "Cointelegraph"
+      ],
+      "importanceScore": 65,
+      "relatedAssets": [
+        "BTC"
+      ],
+      "sourceArticleIds": [
+        "news-event-24"
+      ]
+    },
+    {
+      "id": "news-event-7",
+      "title": "Trump-backed World Liberty wins conditional bank charter from federal regulator",
+      "summary": "来源：CoinDesk",
+      "publishedAt": "2026-08-14T21:05:23.000Z",
+      "sourceCount": 1,
+      "sources": [
+        "CoinDesk"
+      ],
+      "importanceScore": 50,
+      "relatedAssets": [
+        "BTC"
+      ],
+      "sourceArticleIds": [
+        "news-event-7"
+      ]
+    },
+    {
+      "id": "news-event-15",
+      "title": "Tokenization stocks slip as SEC delay puts 'speed bump' in crypto’s Wall Street push",
+      "summary": "来源：CoinDesk",
+      "publishedAt": "2026-08-14T17:48:04.000Z",
+      "sourceCount": 1,
+      "sources": [
+        "CoinDesk"
+      ],
+      "importanceScore": 50,
+      "relatedAssets": [
+        "BTC"
+      ],
+      "sourceArticleIds": [
+        "news-event-15"
+      ]
+    },
+    {
+      "id": "news-event-8",
+      "title": "France Tax Data Leak Could Fuel Scams, Attacks Targeting Bitcoin Holders",
+      "summary": "来源：Decrypt",
+      "publishedAt": "2026-08-14T21:03:35.000Z",
+      "sourceCount": 1,
+      "sources": [
+        "Decrypt"
+      ],
+      "importanceScore": 45,
+      "relatedAssets": [
+        "BTC"
+      ],
+      "sourceArticleIds": [
+        "news-event-8"
+      ]
+    },
+    {
+      "id": "news-event-16",
+      "title": "Coldcard Bitcoin Thefts Slow, But Losses Could Top $150 Million: Galaxy",
+      "summary": "来源：Decrypt",
+      "publishedAt": "2026-08-14T17:46:06.000Z",
+      "sourceCount": 1,
+      "sources": [
+        "Decrypt"
+      ],
+      "importanceScore": 45,
+      "relatedAssets": [
+        "BTC"
+      ],
+      "sourceArticleIds": [
+        "news-event-16"
+      ]
+    },
+    {
+      "id": "news-event-18",
+      "title": "Another Bitcoin Miner Sells Off BTC to Fund AI Data Center Pivot",
+      "summary": "来源：Decrypt",
+      "publishedAt": "2026-08-14T16:23:20.000Z",
+      "sourceCount": 1,
+      "sources": [
+        "Decrypt"
+      ],
+      "importanceScore": 45,
+      "relatedAssets": [
+        "BTC"
+      ],
+      "sourceArticleIds": [
+        "news-event-18"
+      ]
+    },
+    {
+      "id": "news-event-19",
+      "title": "Crypto Biz: Bitcoin’s $116M self-custody wake-up call",
+      "summary": "来源：Cointelegraph",
+      "publishedAt": "2026-08-14T15:29:13.000Z",
+      "sourceCount": 1,
+      "sources": [
+        "Cointelegraph"
+      ],
+      "importanceScore": 45,
+      "relatedAssets": [
+        "BTC"
+      ],
+      "sourceArticleIds": [
+        "news-event-19"
+      ]
+    },
+    {
+      "id": "news-event-22",
+      "title": "Bitcoin price drops to $62.5K as trader warns weekly close may spark more losses",
+      "summary": "来源：Cointelegraph",
+      "publishedAt": "2026-08-14T14:38:27.000Z",
+      "sourceCount": 1,
+      "sources": [
+        "Cointelegraph"
+      ],
+      "importanceScore": 45,
+      "relatedAssets": [
+        "BTC"
+      ],
+      "sourceArticleIds": [
+        "news-event-22"
+      ]
+    }
+  ],
+  "dataQuality": {
+    "unavailableSources": [],
+    "partialSources": [],
+    "staleSources": []
+  },
+  "positionContext": null
+}

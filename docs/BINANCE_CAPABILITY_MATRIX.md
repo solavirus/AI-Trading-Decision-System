@@ -1,0 +1,18 @@
+# Binance USDⓈ-M Futures Capability Matrix (Sprint 3.6B, router principle corrected 3.6B.1)
+
+Live-verified 2026-08-11 against `developers.binance.com` USDS-M Futures REST docs. Short reference only — not a research paper.
+
+| Capability | Official support | Current app support (pre-3.6B) | 3.6B decision |
+|---|---|---|---|
+| LIMIT/MARKET entry, `POST /fapi/v1/order` | Yes | Yes (Sprint 3.5D-B) | Reuse unchanged. `EXCHANGE_NATIVE` candidate for simple triggers. |
+| `timeInForce` values | `GTC, IOC, FOK, GTX, GTD, RPI` | Only `GTC` hardcoded | Add `GTD` support for entry orders when Strategy has a numeric `expiresAt` and entry is LIMIT — see Expiry policy. |
+| `GTD` / `goodTillDate` | Supported on `POST /fapi/v1/order`. `goodTillDate` = Unix ms, must be `> now+600s` and `< 253402300799000`; second-level precision only. | Not used | Use when `expiresAt - now > 600s`; otherwise fall back to app-side expiry (cancel via existing `DELETE /order`) — never send an invalid `goodTillDate`. |
+| Conditional/algo orders (`STOP_MARKET`/`TAKE_PROFIT_MARKET`), `POST/DELETE /fapi/v1/algoOrder` | Yes | Yes (Sprint 3.5D-E), protection only | Unchanged. Not used for entry triggers this sprint. |
+| `workingType` (MARK_PRICE/CONTRACT_PRICE) | Yes, algo orders | `MARK_PRICE` default (3.5D-E) | Unchanged, not touched. |
+| `priceProtect` | Yes, algo orders | `TRUE` default (3.5D-E) | Unchanged, not touched. |
+| `TRAILING_STOP_MARKET` | Exists as a `type` value; conditional-order semantics, dedicated algo endpoint | Read-only mapping only (`normalizeExchangeOrder`), never submitted | Research only per Section 7 — **not opened for submission this sprint.** |
+| Simple numeric trigger expressible as one exchange order (e.g. "LIMIT at price X") | Native LIMIT order IS the trigger | N/A | `EXCHANGE_NATIVE` |
+| Multi-condition / AND-OR / candle-close / RSI trigger | No native Binance construct for this | N/A | `APP_MONITORED` — evaluated deterministically backend-side, existing `POST /order` used only once the trigger fires |
+| RSI / Volume as trigger metric | N/A (Binance has no indicator-trigger endpoint) | Not implemented | Deferred — Market Research's own indicator reliability not verified as trigger-grade this sprint (Section 6: "如果数据源不足，不要伪造支持"). Only `PRICE`/`CANDLE_CLOSE_PRICE` + `AND`/`OR` shipped. |
+
+**Router principle (corrected 3.6B.1)**: a trigger that reduces to exactly one condition, metric `PRICE`, with a resolvable numeric LIMIT entry price and a numeric `expiresAt` far enough in the future for `GTD`, qualifies for `EXCHANGE_NATIVE` only when BOTH additionally hold: (1) the condition's price value equals the LIMIT entry price (the trigger IS the order, not a separate level), and (2) the operator matches the entry side's natural LIMIT-fill direction — a LONG (BUY) entry natively fills as price falls to/through a level, so only `LTE`/`LT` qualify; a SHORT (SELL) entry natively fills as price rises to/through a level, so only `GTE`/`GT` qualify. This was a real 3.6B classification bug, not a market-proximity rule — the router never took a current-market-price input for this decision at all (only the separate `GTD` lead-time check uses "now"), so classification was always independent of how close the trigger price is to the live market price; the fix is about DIRECTION semantics, not distance. A `GTE`/breakout trigger paired with a LONG limit buy (e.g. "buy once price breaks above X") has no native single-order equivalent on Binance and correctly routes to `APP_MONITORED`. Everything else (AND/OR, `CANDLE_CLOSE_PRICE`, MARKET entry with a price trigger, a price-level/direction mismatch, or an `expiresAt` too close for `GTD`) → `APP_MONITORED`. A trigger metric outside `{PRICE, CANDLE_CLOSE_PRICE}` → `UNSUPPORTED`.

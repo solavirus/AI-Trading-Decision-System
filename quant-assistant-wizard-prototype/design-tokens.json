@@ -1,0 +1,21 @@
+{
+  "color": {
+    "canvas": "#F6F0E3",
+    "card": "#FFFDF7",
+    "muted": "#F2EBDD",
+    "ink": "#26231F",
+    "inkSecondary": "#514B43",
+    "inkMuted": "#81786C",
+    "primary": "#4E5DE7",
+    "primarySoft": "#E9EBFF",
+    "gold": "#E3A62F",
+    "positive": "#198754",
+    "negative": "#D84D43",
+    "warning": "#E68B20"
+  },
+  "radius": { "card": 16, "control": 12, "tag": 8 },
+  "spacing": [4, 8, 12, 16, 20, 24, 32],
+  "border": { "width": 1.25, "color": "rgba(38,35,31,.82)" },
+  "shadow": "0 2px 0 rgba(38,35,31,.10), 0 8px 20px rgba(67,53,34,.035)",
+  "motion": { "fast": 140, "normal": 180 }
+}

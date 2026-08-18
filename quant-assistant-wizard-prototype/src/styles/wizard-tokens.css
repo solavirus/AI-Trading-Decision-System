@@ -1,0 +1,62 @@
+:root {
+  --wn-canvas: #f6f0e3;
+  --wn-card: #fffdf7;
+  --wn-muted: #f2ebdd;
+  --wn-ink: #26231f;
+  --wn-ink-700: #514b43;
+  --wn-ink-500: #81786c;
+  --wn-blue: #4e5de7;
+  --wn-blue-soft: #e9ebff;
+  --wn-gold: #e3a62f;
+  --wn-positive: #198754;
+  --wn-negative: #d84d43;
+  --wn-warning: #e68b20;
+  --wn-radius-card: 16px;
+  --wn-radius-control: 12px;
+  --wn-border: 1.25px solid rgba(38, 35, 31, .82);
+  --wn-shadow: 0 2px 0 rgba(38,35,31,.10), 0 8px 20px rgba(67,53,34,.035);
+  --wn-font-ui: Inter, "PingFang SC", "Microsoft YaHei", ui-sans-serif, sans-serif;
+}
+
+.wizard-notebook-page {
+  min-height: 100vh;
+  color: var(--wn-ink);
+  font-family: var(--wn-font-ui);
+  background-color: var(--wn-canvas);
+  background-image:
+    radial-gradient(rgba(38,35,31,.035) .55px, transparent .7px),
+    linear-gradient(90deg, rgba(130,100,55,.018), transparent 38%, rgba(130,100,55,.012));
+  background-size: 5px 5px, 100% 100%;
+}
+
+.doodle-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  border: var(--wn-border);
+  border-radius: var(--wn-radius-card);
+  background: rgba(255,253,247,.94);
+  box-shadow: var(--wn-shadow);
+  transition: transform 160ms ease, box-shadow 160ms ease;
+}
+
+.doodle-card:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 3px 0 rgba(38,35,31,.11), 0 12px 24px rgba(67,53,34,.05);
+}
+
+.doodle-card::after {
+  content: "";
+  position: absolute;
+  inset: 2px -1px -1px 2px;
+  border: 1px solid rgba(38,35,31,.10);
+  border-radius: inherit;
+  pointer-events: none;
+  transform: rotate(.08deg);
+}
+
+.doodle-link { color: var(--wn-blue); font-weight: 650; }
+.doodle-positive { color: var(--wn-positive); }
+.doodle-negative { color: var(--wn-negative); }
+.doodle-warning { color: var(--wn-warning); }
