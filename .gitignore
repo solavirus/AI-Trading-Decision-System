@@ -1,0 +1,30 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+out/
+build/
+
+# Environment / secrets
+.env
+.env.*
+!.env.example
+
+# Runtime data / logs / temp
+*.log
+.tmp_*/
+tmp/
+temp/
+
+# IDE / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# Claude Code local state (kept out of version control; project settings, if any, are added explicitly)
+.claude/
