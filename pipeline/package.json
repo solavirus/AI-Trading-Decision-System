@@ -1,9 +1,9 @@
 {
-  "name": "quant-pipeline",
+  "name": "ai-trading-decision-system-backend",
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "Real data-source acquisition/aggregation pipeline for the Quant Decision System. Program-side collection, filtering and weight-driven budgeting only — no LLM calls yet.",
+  "description": "Backend for the AI Trading Decision System: market data acquisition, AI analysis, structured decision validation, risk controls, TESTNET execution, monitoring and reconciliation.",
   "scripts": {
     "fetch": "tsx src/run.ts",
     "serve": "tsx src/server.ts",
