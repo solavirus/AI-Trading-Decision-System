@@ -1,7 +1,0 @@
-{
-  "provider": "openai-compatible",
-  "model": "gpt-5.6-sol",
-  "connectionId": "openai-compatible",
-  "latencyMs": 44413,
-  "status": "success"
-}
