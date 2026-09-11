@@ -1,8 +1,12 @@
 # AI Trading Decision System
 
-一个让 AI 基于多源市场信息、账户状态与风险约束，自主完成市场分析、交易决策、执行与持续管理的实验系统。
+一个让 AI 基于多源市场信息、账户状态与风险约束，完成**市场分析 → 交易决策 → 风控 → 测试网执行 → 持续管理**的实验系统。
 
-它不是传统意义上的因子量化、统计套利或高频交易系统。这个项目更关注一个问题：**如何把交易者原本依赖人工完成的“获取信息 → 形成判断 → 制定策略 → 执行 → 管理”过程，结构化为 AI 可以持续运行、可验证、可约束的决策链路。**
+它不是传统意义上的因子量化、统计套利或高频交易系统。这个项目关注的是：**如何把交易者原本依赖人工完成的决策过程，结构化为 AI 可以持续运行、可追踪、可验证、可约束的系统。**
+
+> 当前交易写操作硬性限制为 Binance Futures TESTNET（币安合约测试网），不提供“一键切换实盘”。
+
+![Analysis Runner（分析运行界面）](assets/screenshots/analysis-runner-ready.png)
 
 ## 一笔决策如何产生
 
@@ -21,169 +25,128 @@ Final Decision（最终决策）
         ↓
 Risk Guard（风险守卫）
         ↓
-Execution（执行）
+Execution（测试网执行）
         ↓
 Monitoring / Reconciliation（持续监控 / 对账）
 ```
 
-项目当前正在重构 **AI Analysis V2（AI 分析第二版）**，核心目标是把“市场事实、市场判断、交易策略、账户适配、最终决策”拆成更清晰的认知与执行层，而不是单纯继续堆叠 Prompt（提示词）。
+更完整的真实架构见 [`docs/architecture/ARCHITECTURE.md`](docs/architecture/ARCHITECTURE.md)。
 
-## 已经真实跑通的能力
+## 已经真实跑通
 
-以下能力均有真实代码支撑，不是设计稿：
+- **11 类市场信息并行采集**：行情、技术指标、宏观、新闻、ETF 资金流、链上、情绪、衍生品、稳定币、清算、期权。
+- **Account Snapshot（账户快照）**：读取 Binance 账户 / 持仓并进入分析上下文。
+- **统一 Analysis Engine（分析引擎）**：Manual / Automatic Analysis（手动 / 自动分析）共享同一条执行链路。
+- **Analysis Evidence（分析证据）**：保存 Payload（输入数据）、Prompt（提示词）、AI 原始响应与解析结果。
+- **Structured Decision（结构化决策）**：AI 输出经过 Validation（校验）后转换为 StrategyOrder（策略订单）。
+- **Risk Guard（风险守卫）**：AI 建议与交易执行之间存在独立、确定性的规则校验层。
+- **TESTNET Execution（测试网执行）**：真实调用 Binance Futures TESTNET 完成下单、撤单、止损止盈。
+- **Monitoring / Reconciliation（监控 / 对账）**：持续跟踪订单与持仓，并处理本地状态与交易所状态不一致。
+- **Kill Switch（紧急停止开关）**：自动化策略支持全局暂停。
 
-- **11 类市场数据并行采集** —— 行情、技术指标、宏观、新闻、ETF 资金流、链上、情绪、衍生品、稳定币、清算、期权
-- **Account Snapshot（账户快照）** —— 读取真实 Binance 账户与持仓，并纳入分析上下文
-- **Manual / Automatic Analysis（手动 / 自动分析）** —— 手动触发与自动调度共用同一条 Analysis Engine（分析引擎）
-- **Analysis Evidence（分析证据）** —— Payload（输入数据）、Prompt（提示词）、AI 原始响应、解析结果全链路留痕
-- **AnalysisRun Lifecycle（分析任务生命周期）** —— 支持进度、取消、异常任务对账，确保分析任务最终进入明确终态
-- **StrategyOrder（策略订单）** —— 将 AI 决策转换为结构化订单对象
-- **Risk Guard（风险守卫）** —— 在交易执行前进行规则校验
-- **TESTNET Execution（测试网执行）** —— 真实调用 Binance Futures TESTNET（币安合约测试网）完成下单、撤单、止损止盈
-- **RealTrade Reconciliation（真实交易对账）** —— 本地交易记录与交易所状态定期对账
-- **Kill Switch（紧急停止开关）** —— 支持暂停自动化策略执行
-- **Monitoring（持续监控）** —— 持续跟踪持仓和订单状态
+## 为什么这个项目不只是一个 AI Demo（AI 演示原型）
 
-## 这个项目重点解决什么
+### AI 输出不能直接等于交易指令
 
-### 1. 把非结构化判断变成可执行决策
+模型输出先经过 Output Schema（输出结构）与 Validation（校验），再生成系统可以理解的 StrategyOrder（策略订单）；执行前还会经过独立 Risk Guard（风险守卫）。
 
-AI 不是直接读取一堆市场数据后自由输出文本，而是经过 Snapshot（快照）、Analysis Payload（分析输入）、Prompt（提示词）、Validation（校验）和 StrategyOrder（策略订单）逐层收敛，最终形成可被系统理解和执行的结果。
+### 自动化系统必须处理失败与状态漂移
 
-### 2. AI 不能直接拥有无限执行权
+系统不仅记录“是否下单成功”，还维护 AnalysisRun Lifecycle（分析任务生命周期）、订单 / 持仓状态、保护单以及 RealTrade Reconciliation（真实交易对账）。
 
-AI 输出与真实交易执行之间存在独立的 Risk Guard（风险守卫）和执行准入层。当前所有交易写操作在代码层面硬性限制为 Binance Futures TESTNET（币安合约测试网），不会静默切换到 LIVE（实盘）。
+### 决策必须留下证据
 
-### 3. AI 的过程必须可追踪
-
-系统保留每次分析的输入、Prompt（提示词）、原始响应、解析结果和最终业务记录。即使分析失败，证据也不会被直接丢弃。
-
-### 4. 自动系统必须处理状态不一致
-
-真实交易系统不能只关心“下单成功”。项目实现了分析任务生命周期、订单 / 持仓监控以及 RealTrade Reconciliation（真实交易对账），处理本地状态与交易所状态之间可能出现的偏差。
-
-## Architecture（系统架构）
-
-```text
-Data Sources（11 类数据源）
-        ↓
-Snapshot Acquisition（数据快照）
-        ↓
-AnalysisPayload（结构化分析输入）
-        ↓
-Prompt Builder（提示词构建）
-        ↓
-AI Provider（AI 模型）
-        ↓
-Validation（结果校验）
-        ↓
-StrategyOrder（策略订单）
-        ↓
-Risk Guard（风险守卫）
-        ↓
-Execution（测试网执行）
-        ↓
-Position / RealTrade（持仓 / 真实交易记录）
-        ↓
-Monitoring / Reconciliation（监控 / 对账）
-```
-
-详见 [ARCHITECTURE.md](ARCHITECTURE.md)。
-
-## 当前阶段
-
-稳定基线：`pre-ai-analysis-v2`
-
-当前最高优先级：**AI Analysis V2（AI 分析第二版）**。
-
-```text
-市场事实 → 市场判断 → 交易策略 → 账户 / 持仓适配 → 最终决策
-```
-
-设计顺序：
-
-```text
-AI Analysis（AI 分析）
-→ Output Schema（输出结构）
-→ Prompt（提示词）
-→ Risk Guard（风险守卫）重新审视
-```
-
-详见 [PROJECT_STATUS.md](PROJECT_STATUS.md) 和 [ROADMAP.md](ROADMAP.md)。
+一次分析不是只有最终答案。系统会保留当时的输入、Prompt（提示词）、AI 原始响应、解析结果和业务记录，为后续复盘与 Attribution / Learning（归因 / 学习）提供事实基础。
 
 ## Safety Boundary（安全边界）
 
-- 所有交易所写操作（下单、撤单、止损止盈、杠杆调整）目前**硬性限制为 Binance Futures TESTNET（币安合约测试网）**。
-- 对 `LIVE` 环境提交写请求会被代码直接拒绝。
-- 账户 / 持仓读取可配置 `TESTNET` 或 `LIVE`，但当前实际使用与验证均以 TESTNET 为主。
-- 转向真实 LIVE（实盘）交易需要显式开发与重新审查，不存在“一键切换实盘”的路径。
+- 下单、撤单、止损止盈、杠杆调整等交易所写操作目前只允许 Binance Futures TESTNET（币安合约测试网）。
+- 对 LIVE（实盘）环境发起写请求会被代码直接拒绝。
+- 账户 / 持仓读取可配置 TESTNET / LIVE，但当前项目验证以 TESTNET 为主。
+- 转向 LIVE（实盘）需要显式开发与重新审查，不是配置切换。
 
 ## 技术实现
 
-- **后端**：Node.js + TypeScript（TypeScript：JavaScript 的类型化语言），原生 `http` 模块
-- **存储**：本地 JSON + SQLite（轻量级关系型数据库）
-- **前端**：单文件 HTML Dashboard（仪表盘），无独立构建流程
-- **交易所**：Binance Futures（币安 USDT 本位合约）
-- **AI**：支持 OpenAI / Anthropic / Google / DeepSeek / OpenAI-compatible（兼容 OpenAI 接口）Provider（模型提供方）
+- **Backend（后端）**：Node.js + TypeScript（JavaScript 的类型化语言），原生 `http` 模块。
+- **Storage（存储）**：JSON + SQLite（轻量级关系型数据库）。
+- **Frontend（前端）**：单文件 HTML Dashboard（仪表盘）。
+- **Exchange（交易所）**：Binance Futures（币安 USDT 本位合约）。
+- **AI Providers（模型提供方）**：OpenAI / Anthropic / Google / DeepSeek / OpenAI-compatible（兼容 OpenAI 接口）。
 
-## 如何运行
-
-后端：
+## 本地运行
 
 ```bash
 cd pipeline
 npm install
 npm run serve
-# 或开发模式
-npm run dev
 ```
 
 默认服务地址：`http://localhost:8787`
 
-前端：直接用浏览器打开 `prototype/index.html`。
+然后打开：
 
-其他命令：
+```text
+prototype/index.html
+```
+
+开发 / 检查命令：
 
 ```bash
 cd pipeline
+npm run dev
 npm run typecheck
 npm run fetch
 npm run etf:snapshot
 ```
 
-## 目录结构
+配置示例见 [`pipeline/.env.example`](pipeline/.env.example)。真实 `.env`、运行数据与日志不进入版本控制。
+
+## Repository Map（仓库导航）
 
 ```text
-├── pipeline/                         # 后端：采集、分析、策略、执行、风控、监控
-│   ├── src/
-│   │   ├── server.ts                 # HTTP API 入口
-│   │   ├── sources/ connectors/      # 数据源与 Provider（提供方）适配
-│   │   ├── normalize/ fetchers.ts    # 数据归一化与统一注册
-│   │   ├── analysis/                 # AI 分析引擎
-│   │   ├── ai/                       # AI Provider 抽象层
-│   │   ├── exchange/                 # Binance Futures 适配器
-│   │   ├── strategy/                 # 策略订单、风控、执行、自动化、监控、对账
-│   │   └── etf/ util/ db.ts          # 支撑模块
-│   └── data/                         # 运行时数据，不进入版本控制
-├── prototype/index.html              # 当前前端
-├── *_SPEC.md                         # 工程契约文档
-├── docs/                             # 架构与参考资料
-└── analysis_evidence/                # 历史分析证据样本
+├── README.md                         # 作品入口
+├── assets/
+│   └── screenshots/                  # 展示截图
+├── pipeline/                         # 后端主路径
+│   ├── src/analysis/                 # AI 分析引擎
+│   ├── src/ai/                       # AI Provider（模型提供方）
+│   ├── src/exchange/                 # Binance Futures 适配
+│   └── src/strategy/                 # 风控、执行、自动化、监控、对账
+├── prototype/                        # 当前前端
+├── examples/                         # 经过脱敏的公开案例
+├── test-fixtures/                    # 回归样本
+└── docs/
+    ├── architecture/                 # 当前真实架构
+    ├── design/                       # 产品 / 决策设计
+    ├── engineering/                  # 冻结工程契约
+    ├── development/                  # 状态、路线图、里程碑
+    └── archive/                      # 历史材料，不代表当前实现
 ```
 
-## 文档入口
+完整文档导航见 [`docs/README.md`](docs/README.md)。
 
-| 文档 | 用途 |
-|---|---|
-| [PROJECT_STATUS.md](PROJECT_STATUS.md) | 当前真实状态、已完成能力、优先级、已知问题 |
-| [Trading Decision System.md](Trading%20Decision%20System.md) | 产品决策系统理念与长期方向 |
-| [ARCHITECTURE.md](ARCHITECTURE.md) | 当前真实系统架构 |
-| [ROADMAP.md](ROADMAP.md) | NOW / NEXT / LATER 开发优先级 |
-| [CHANGELOG.md](CHANGELOG.md) | 重要里程碑 |
-| `AI_RESPONSE_SPEC.md` / `ANALYSIS_PAYLOAD_SPEC.md` / `PROMPT_BUILDER_SPEC.md` / `EXECUTION_SPEC.md` / `DATA_SOURCE_SPEC.md` | 各层冻结工程契约 |
+## 推荐阅读顺序
+
+1. [`README.md`](README.md) — 先理解项目做什么。
+2. [`docs/design/TRADING_DECISION_SYSTEM.md`](docs/design/TRADING_DECISION_SYSTEM.md) — 为什么这样设计决策系统。
+3. [`docs/architecture/ARCHITECTURE.md`](docs/architecture/ARCHITECTURE.md) — 当前真实系统链路。
+4. [`docs/development/PROJECT_STATUS.md`](docs/development/PROJECT_STATUS.md) — 当前状态与已知问题。
+5. [`docs/engineering/`](docs/engineering/) — 深入查看工程契约。
+
+## Current Direction（当前方向）
+
+当前稳定基线为 `pre-ai-analysis-v2`。下一阶段正在重新定义 AI Analysis V2（AI 分析第二版）：
+
+```text
+市场事实 → 市场判断 → 交易策略 → 账户 / 持仓适配 → 最终决策
+```
+
+目标不是继续堆叠 Prompt（提示词），而是让 AI 的认知步骤、输入输出契约和执行边界更清楚。
+
+路线图见 [`docs/development/ROADMAP.md`](docs/development/ROADMAP.md)。
 
 ## 关于“量化”
 
-这个项目会使用程序化数据处理、技术指标、统计信息和规则风控等 Quantitative Methods（量化方法），但它的核心目标不是复制传统 Quant System（量化系统）。
+项目会使用程序化数据处理、技术指标、统计信息与规则风控等 Quantitative Methods（量化方法），但核心研究对象不是传统 Quant System（量化系统），而是：
 
-项目真正探索的是：**AI 能否在有数据、有上下文、有约束、有证据链的前提下，承担更完整的交易决策过程。**
+**AI 能否在有数据、有账户上下文、有风险约束、有证据链的前提下，承担更完整的交易决策过程。**
