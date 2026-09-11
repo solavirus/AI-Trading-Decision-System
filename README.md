@@ -8,6 +8,8 @@
 
 ![Analysis Runner（分析运行界面）](assets/screenshots/analysis-runner-ready.png)
 
+▶ [User Journey Demo（用户旅程演示）](assets/demo/user-journey-demo.mov)
+
 ## 一笔决策如何产生
 
 ```text
@@ -106,7 +108,8 @@ npm run etf:snapshot
 ```text
 ├── README.md                         # 作品入口
 ├── assets/
-│   └── screenshots/                  # 展示截图
+│   ├── screenshots/                 # 展示截图
+│   └── demo/                        # 用户旅程演示视频
 ├── pipeline/                         # 后端主路径
 │   ├── src/analysis/                 # AI 分析引擎
 │   ├── src/ai/                       # AI Provider（模型提供方）
